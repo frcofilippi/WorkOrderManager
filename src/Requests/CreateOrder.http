@@ -1,0 +1,21 @@
+@host=http://localhost:5085
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxODc2MWE0NC0xYzVkLTRiZDktYWM4Ni1jNmMyNTcxZDY0ZDQiLCJnaXZlbl9uYW1lIjoiRnJhbmNvIiwiZmFtaWx5X25hbWUiOiJGaWxpcHBpIiwianRpIjoiYmE0NjgxMzEtZWFlZi00MTE4LTk1ZDQtZDkxNDhkZWVhYmIzIiwiZXhwIjoxNjk3NjUzMTI3LCJpc3MiOiJXb3JrT3JkZXJNYW5hZ2VyIiwiYXVkIjoiV29ya09yZGVyTWFuYWdlciJ9.vVCSeGroOmxekAsMd6I5mBgQZG5E5ZYEqYabjVkZN9g
+POST {{host}}/Order/New
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "firstName": "Franco",
+  "lastName": "Filippi",
+  "lines": [
+    {
+      "name": "line 1",
+      "description": "desc 1"
+    },
+    {
+      "name": "line 2",
+      "description": "desc 2"
+    }
+  ]
+}

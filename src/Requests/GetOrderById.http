@@ -1,0 +1,9 @@
+@host=http://localhost:5085
+@orderId=0f9baf83-d995-4667-a03b-7dd6ed39b96c
+
+GET {{host}}/Order/GetOrderById/?Id={{orderId}}
+Accept: application/json
+Content-Type: application/json
+
+{
+}
