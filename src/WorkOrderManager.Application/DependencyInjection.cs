@@ -3,8 +3,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 using System.Reflection;
 
-using WorkOrderManager.Application.Authentication;
-using WorkOrderManager.Application.Services;
+using WorkOrderManager.Application.Services.Authentication;
 
 public static class DependencyInjection
 {

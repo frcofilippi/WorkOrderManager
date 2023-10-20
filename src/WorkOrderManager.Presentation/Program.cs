@@ -24,6 +24,7 @@ internal class Program
 
         builder.Services.AddApplicationServices();
         builder.Services.AddInfrastructureServices(builder.Configuration);
+        builder.Services.AddHttpContextAccessor();
 
         var app = builder.Build();
 
@@ -33,7 +34,6 @@ internal class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-
         app.UseExceptionHandler("/error");
         app.UseHttpsRedirection();
         app.UseAuthentication();

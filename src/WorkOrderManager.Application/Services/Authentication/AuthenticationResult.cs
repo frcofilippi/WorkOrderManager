@@ -1,5 +1,5 @@
 
-namespace WorkOrderManager.Application.Services;
+namespace WorkOrderManager.Application.Services.Authentication;
 
 public record AuthenticationResult
 {

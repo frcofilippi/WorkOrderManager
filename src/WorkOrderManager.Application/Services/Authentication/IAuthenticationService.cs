@@ -1,7 +1,7 @@
 
 using ErrorOr;
 
-namespace WorkOrderManager.Application.Services;
+namespace WorkOrderManager.Application.Services.Authentication;
 
 public interface IAuthenticationService
 {

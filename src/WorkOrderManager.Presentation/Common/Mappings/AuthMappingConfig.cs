@@ -1,9 +1,9 @@
-using Mapster;
-
-using WorkOrderManager.Application.Services;
-using WorkOrderManager.Presentation.Contracts.Authentincation;
 
 namespace WorkOrderManager.Presentation.Common.Mappings;
+
+using Mapster;
+using WorkOrderManager.Application.Services.Authentication;
+using WorkOrderManager.Presentation.Contracts.Authentincation;
 
 public class AuthMappingConfig : IRegister
 {

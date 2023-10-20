@@ -2,17 +2,11 @@
 namespace WorkOrderManager.Presentation.Controllers;
 
 using ErrorOr;
-
 using MapsterMapper;
-
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
-
 using WorkOrderManager.Presentation.Contracts.Authentincation;
-using IAuthenticationService = WorkOrderManager.Application.Services.IAuthenticationService;
-using AuthenticationResult = WorkOrderManager.Application.Services.AuthenticationResult;
-using System.Reflection.Metadata.Ecma335;
+using IAuthenticationService = WorkOrderManager.Application.Services.Authentication.IAuthenticationService;
+using AuthenticationResult = WorkOrderManager.Application.Services.Authentication.AuthenticationResult;
 
 public class AuthController : ApiController
 {

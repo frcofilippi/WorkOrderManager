@@ -9,13 +9,17 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using WorkOrderManager.Application.Services.JwtTokenGenerator;
+using WorkOrderManager.Application.Services.TimeProvider;
+
 public class JwtTokenGenerator : IJwtTokenGeneratorService
 {
     private readonly JwtSettings _jwtSettings;
+    private readonly IDateTimeService _dateTimeService;
 
-    public JwtTokenGenerator(IOptions<JwtSettings> jwtSettings)
+    public JwtTokenGenerator(IOptions<JwtSettings> jwtSettings, IDateTimeService dateTimeService)
     {
         _jwtSettings = jwtSettings.Value;
+        _dateTimeService = dateTimeService;
     }
 
     public string CreateJwtToken(Guid userId, string firstName, string lastName)
@@ -30,14 +34,14 @@ public class JwtTokenGenerator : IJwtTokenGeneratorService
             new Claim(JwtRegisteredClaimNames.GivenName, firstName),
             new Claim(JwtRegisteredClaimNames.FamilyName, lastName),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(JwtRegisteredClaimNames.Exp, DateTime.UtcNow.AddMinutes(_jwtSettings.LifeTimeInMinutes).ToString()),
+            new Claim(JwtRegisteredClaimNames.Exp, _dateTimeService.DateTime.AddMinutes(_jwtSettings.LifeTimeInMinutes).ToString()),
         };
 
         var securityToken = new JwtSecurityToken(
             issuer: _jwtSettings.Issuer,
             audience: _jwtSettings.Audience,
             claims,
-            expires: DateTime.UtcNow.AddMinutes(_jwtSettings.LifeTimeInMinutes),
+            expires: _dateTimeService.DateTime.AddMinutes(_jwtSettings.LifeTimeInMinutes),
             signingCredentials: securityCredentials);
 
         return new JwtSecurityTokenHandler().WriteToken(securityToken);

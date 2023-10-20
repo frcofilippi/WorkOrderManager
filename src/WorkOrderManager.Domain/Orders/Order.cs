@@ -8,16 +8,19 @@ public class Order : AgregateRoot<OrderId>
 {
     private readonly List<OrderLine> _lines = new();
 
-    private Order(OrderId id, DateTime creationDate, string clientName)
+    private Order(OrderId id, DateTime creationDate, ClientId clientId, string clientName)
         : base(id)
     {
         CreationDate = creationDate;
         ClientName = clientName;
+        ClientId = clientId;
     }
 
     public DateTime CreationDate { get; private set; }
 
     public string ClientName { get; private set; }
+
+    public ClientId ClientId { get; private set; }
 
     public IReadOnlyCollection<OrderLine> OrderLines => _lines.ToList();
 
@@ -26,9 +29,9 @@ public class Order : AgregateRoot<OrderId>
         _lines.Add(line);
     }
 
-    public static Order CreateOrder(string clientName)
+    public static Order CreateOrder(ClientId clientId, string clientName)
     {
-        var order = new Order(OrderId.CreateUnique(), DateTime.UtcNow, clientName);
+        var order = new Order(OrderId.CreateUnique(), DateTime.UtcNow, clientId, clientName);
         return order;
     }
 

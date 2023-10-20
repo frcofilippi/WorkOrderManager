@@ -1,5 +1,5 @@
 
-namespace WorkOrderManager.Application.Authentication;
+namespace WorkOrderManager.Application.Services.Authentication;
 
 using ErrorOr;
 using WorkOrderManager.Application.Services;

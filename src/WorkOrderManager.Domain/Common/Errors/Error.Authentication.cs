@@ -13,5 +13,9 @@ public static partial class Errors
         public static Error WrongLoginInformation => Error.Unauthorized(
         nameof(WrongLoginInformation),
         "Invalid credentials.");
+
+        public static Error CouldNotParseUserFromRequest => Error.Unauthorized(
+            nameof(CouldNotParseUserFromRequest),
+            "UserId could not be parsed from the request.");
     }
 }

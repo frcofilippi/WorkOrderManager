@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 public class ApiController : ControllerBase
 {
 
+[ApiExplorerSettings(IgnoreApi = true)]
     public IActionResult Problem(List<Error> errors)
     {
         var error = errors[0];

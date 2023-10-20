@@ -26,6 +26,8 @@ public class OrderMappingConfig : IRegister
         config.NewConfig<Order, CreateOrderResponse>()
         .Map(dest => dest.OrderId, src => src.Id.Value)
         .Map(dest => dest.OrderLines, src => src.OrderLines.ToList())
+        .Map(dest => dest.ClienId, src => src.ClientId.Value.ToString())
+        .Map(dest => dest.ClientName, src => src.ClientName)
         .Map(dest => dest, src => src);
 
         config.NewConfig<GetOrderByIdRequest, GetOrderByIdQuery>()
