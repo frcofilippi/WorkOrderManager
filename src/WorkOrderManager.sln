@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkOrderManager.Applicatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkOrderManager.Infrastructure", "WorkOrderManager.Infrastructure\WorkOrderManager.Infrastructure.csproj", "{242FC012-F761-4785-A7B1-9156656AB59E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkOrderManager.Test", "WorkOrderManager.Test\WorkOrderManager.Test.csproj", "{60F18B83-EB76-406E-B8D8-244E202971A0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkOrderManager.Presentation", "WorkOrderManager.Presentation\WorkOrderManager.Presentation.csproj", "{50FC3B0A-E352-4706-ADFC-F2BAC0772FEE}"
 EndProject
 Global
@@ -31,10 +29,6 @@ Global
 		{242FC012-F761-4785-A7B1-9156656AB59E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{242FC012-F761-4785-A7B1-9156656AB59E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{242FC012-F761-4785-A7B1-9156656AB59E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{60F18B83-EB76-406E-B8D8-244E202971A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60F18B83-EB76-406E-B8D8-244E202971A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60F18B83-EB76-406E-B8D8-244E202971A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60F18B83-EB76-406E-B8D8-244E202971A0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{50FC3B0A-E352-4706-ADFC-F2BAC0772FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{50FC3B0A-E352-4706-ADFC-F2BAC0772FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50FC3B0A-E352-4706-ADFC-F2BAC0772FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU

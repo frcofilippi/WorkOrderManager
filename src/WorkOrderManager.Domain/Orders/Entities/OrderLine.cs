@@ -1,5 +1,4 @@
-﻿
-namespace WorkOrderManager.Domain.Orders.Entities;
+﻿namespace WorkOrderManager.Domain.Orders.Entities;
 
 using WorkOrderManager.Domain.Model;
 using WorkOrderManager.Domain.Orders.ValueObjects;

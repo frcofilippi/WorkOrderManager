@@ -1,4 +1,3 @@
-
 namespace WorkOrderManager.Domain.Orders.ValueObjects;
 
 using WorkOrderManager.Domain.Model;
@@ -16,13 +15,10 @@ public class ClientId : ValueObject
         return new ClientId(Guid.NewGuid());
     }
 
+    public static ClientId Create(Guid userJti) => new ClientId(userJti);
+
     protected override IEnumerable<object> GetEquialityComponents()
     {
         yield return Value;
-    }
-
-    public static ClientId Create(Guid userJti)
-    {
-        return new ClientId(userJti);
     }
 }

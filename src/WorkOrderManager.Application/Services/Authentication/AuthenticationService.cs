@@ -11,9 +11,9 @@ using WorkUserManager.Application.Common.Repositories;
 public class AuthenticationService : IAuthenticationService
 {
     private readonly IJwtTokenGeneratorService _jwtTokenGenerator;
-    private readonly IUserRepository _userRepository;
+    private readonly IClientRepository _userRepository;
 
-    public AuthenticationService(IJwtTokenGeneratorService jwtTokenGenerator, IUserRepository userRepository)
+    public AuthenticationService(IJwtTokenGeneratorService jwtTokenGenerator, IClientRepository userRepository)
     {
         _jwtTokenGenerator = jwtTokenGenerator;
         _userRepository = userRepository;
@@ -27,7 +27,7 @@ public class AuthenticationService : IAuthenticationService
             return Errors.Authentication.UserAlreadyExist;
         }
 
-        var user = User.CreateUser(firstName, lastName, username, password);
+        var user = Client.CreateUser(firstName, lastName, username, password);
 
         await _userRepository.AddUser(user);
 

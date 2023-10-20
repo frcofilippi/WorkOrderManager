@@ -1,4 +1,3 @@
-
 namespace WorkOrderManager.Domain.Orders;
 
 using WorkOrderManager.Domain.Model;
@@ -6,7 +5,7 @@ using WorkOrderManager.Domain.Orders.Entities;
 using WorkOrderManager.Domain.Orders.ValueObjects;
 public class Order : AgregateRoot<OrderId>
 {
-    private readonly List<OrderLine> _lines = new();
+    private readonly List<OrderLine> _lines = new ();
 
     private Order(OrderId id, DateTime creationDate, ClientId clientId, string clientName)
         : base(id)
@@ -21,6 +20,8 @@ public class Order : AgregateRoot<OrderId>
     public string ClientName { get; private set; }
 
     public ClientId ClientId { get; private set; }
+
+    public string ShippingAddress { get; private set; }
 
     public IReadOnlyCollection<OrderLine> OrderLines => _lines.ToList();
 

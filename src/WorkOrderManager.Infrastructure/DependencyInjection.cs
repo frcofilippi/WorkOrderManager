@@ -60,6 +60,6 @@ public static class DependencyInjection
     private static void AddPersistance(IServiceCollection services)
     {
         services.AddScoped<IOrderRepository, OrderRepository>();
-        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IClientRepository, ClientRepository>();
     }
 }

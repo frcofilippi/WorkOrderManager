@@ -6,7 +6,7 @@ using WorkOrderManager.Domain.Orders;
 using WorkOrderManager.Domain.Orders.ValueObjects;
 public class OrderRepository : IOrderRepository
 {
-    private static readonly List<Order>? _orders = new();
+    private static readonly List<Order> _orders = new ();
 
     public IReadOnlyCollection<Order> Orders => _orders!.ToList();
 
