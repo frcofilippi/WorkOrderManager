@@ -2,21 +2,23 @@ namespace WorkOrderManager.Domain.Clients;
 
 using WorkOrderManager.Domain.Orders.ValueObjects;
 using WorkOrderManager.Domain.Clients.Entities;
+using WorkOrderManager.Domain.Orders;
 
 public class Client
 {
     private readonly List<Address?> _addresses = new ();
+    private readonly List<Order?> _orders = new ();
 
-    private Client(ClientId id, string firstName, string lastName, string email, string password)
+    private Client(ClientId clientId, string firstName, string lastName, string email, string identityId)
     {
-        Id = id;
+        ClientId = clientId;
         FirstName = firstName;
         LastName = lastName;
         Email = email;
-        Password = password;
+        IdentityId = identityId;
     }
 
-    public ClientId Id { get; private set; }
+    public ClientId ClientId { get; private set; }
 
     public string FirstName { get; private set; }
 
@@ -24,11 +26,11 @@ public class Client
 
     public string Email { get; private set; }
 
-    public string Password { get; private set; }
+    public string IdentityId { get; private set; }
 
-    public IReadOnlyCollection<Address?> ShippingAddresses => _addresses.Where(a => a.IsShipping).ToList();
+    public IReadOnlyCollection<Order?> Orders => _orders.AsReadOnly();
 
-    public IReadOnlyCollection<Address?> BillingAddresses => _addresses.Where(a => a.IsBilling).ToList();
+    public IReadOnlyCollection<Address?> Addresses => _addresses.AsReadOnly();
 
     public void AddNewShippingAddress(string name, string street, int number, string city, string country = "AR")
     {
@@ -40,8 +42,8 @@ public class Client
         _addresses.Add(Address.Create(name, street, number, city, country, true, false));
     }
 
-    public static Client CreateUser(string firstName, string lastName, string email, string password)
+    public static Client CreateUser(string firstName, string lastName, string email, string identityId)
     {
-        return new Client(ClientId.CreateUnique(), firstName, lastName, email, password);
+        return new Client(ClientId.CreateUnique(), firstName, lastName, email, identityId);
     }
 }

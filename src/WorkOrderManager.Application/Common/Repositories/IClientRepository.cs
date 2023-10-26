@@ -5,8 +5,6 @@ namespace WorkUserManager.Application.Common.Repositories;
 
 public interface IClientRepository
 {
-    IReadOnlyCollection<Client> Users { get; }
-
     Task<Client> AddUser(Client user);
 
     Task RemoveUser(Client user);
@@ -18,4 +16,6 @@ public interface IClientRepository
     Task<Client?> FindByEmail(string email);
 
     Task<bool> UserAlreadyExists(string email);
+
+    Task<ClientId?> GetClientIdFromIdentityId(string identityId);
 }

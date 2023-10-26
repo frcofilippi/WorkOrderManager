@@ -1,35 +1,44 @@
-﻿
-namespace WorkOrderManager.Infrastructure.Persistence.Repositories;
+﻿using System.Security.Cryptography.X509Certificates;
+
+using Microsoft.EntityFrameworkCore;
 
 using WorkOrderManager.Application.Common.Repositories;
 using WorkOrderManager.Domain.Orders;
 using WorkOrderManager.Domain.Orders.ValueObjects;
+
+namespace WorkOrderManager.Infrastructure.Persistence.Repositories;
+
 public class OrderRepository : IOrderRepository
 {
-    private static readonly List<Order> _orders = new ();
+    private readonly AppDbContext _dbContext;
 
-    public IReadOnlyCollection<Order> Orders => _orders!.ToList();
+    public OrderRepository(AppDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
 
     public async Task<Order> AddOrder(Order order)
     {
-        _orders.Add(order);
-        return await Task.FromResult(order);
+        await _dbContext.Orders.AddAsync(order);
+        await _dbContext.SaveChangesAsync();
+        return order;
     }
 
     public async Task<Order?> GetOrderById(OrderId orderId)
     {
-        var order = await Task.FromResult(_orders!.FirstOrDefault(o => o.Id == orderId));
-        return order;
+        return await _dbContext.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
     }
 
     public async Task RemoveOrder(Order order)
     {
-       await Task.FromResult(_orders!.Remove(order));
+        _dbContext.Orders.Remove(order);
+        await _dbContext.SaveChangesAsync();
     }
 
     public async Task UpdateOrder(Order order)
     {
-        await Task.FromResult(1);
+        _dbContext.Orders.Update(order);
+        await _dbContext.SaveChangesAsync();
     }
 
 }

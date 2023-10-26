@@ -2,18 +2,26 @@
 
 using System.Text;
 
+using FirebaseAdmin;
+
+using Google.Apis.Auth.OAuth2;
+
 using MediatR.Registration;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 using WorkOrderManager.Application.Common.Repositories;
+using WorkOrderManager.Application.Services.Authentication;
 using WorkOrderManager.Application.Services.Identity;
 using WorkOrderManager.Application.Services.JwtTokenGenerator;
 using WorkOrderManager.Application.Services.TimeProvider;
 using WorkOrderManager.Infrastructure.Authentication;
+using WorkOrderManager.Infrastructure.Authentication.Firebase;
 using WorkOrderManager.Infrastructure.Authentication.Identity;
+using WorkOrderManager.Infrastructure.Persistence;
 using WorkOrderManager.Infrastructure.Persistence.Repositories;
 using WorkOrderManager.Infrastructure.TimeProvider;
 
@@ -41,24 +49,37 @@ public static class DependencyInjection
         var jwtSettings = new JwtSettings();
         configuration.Bind(JwtSettings.SectionName, jwtSettings);
         services.AddSingleton(Options.Options.Create(jwtSettings));
-        services.AddSingleton<IJwtTokenGeneratorService, JwtTokenGenerator>();
+        // services.AddSingleton<IJwtTokenGeneratorService, JwtTokenGenerator>();
         services.AddScoped<IIdentityService, IdentityService>();
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters()
+            .AddJwtBearer(options =>
             {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = jwtSettings.Issuer,
-                ValidAudience = jwtSettings.Audience,
-                IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(jwtSettings.SecretKey)),
+                options.Authority = jwtSettings.Issuer;
+                options.Audience = jwtSettings.Audience;
+                options.TokenValidationParameters.ValidIssuer = jwtSettings.Issuer;
             });
+
+        FirebaseApp.Create(new AppOptions
+        {
+            Credential = GoogleCredential.FromFile("firebase.json"),
+        });
+        services.AddHttpClient<IJwtTokenGeneratorService, FirebaseJwtTokenGenerator>((sp, client) =>
+        {
+            var firebaseSettings = new FirebaseSettings();
+            configuration.Bind(FirebaseSettings.SectionName, firebaseSettings);
+            client.BaseAddress = new Uri(string.Concat(firebaseSettings.Url, firebaseSettings.ApiKey));
+        });
+        services.AddScoped<IAuthenticationServiceV2, FirebaseAuthService>();
     }
 
     private static void AddPersistance(IServiceCollection services)
     {
+
+        services.AddDbContext<AppDbContext>((sp, options) =>
+        {
+            var connectionString = sp.GetRequiredService<IConfiguration>().GetConnectionString("default");
+            options.UseNpgsql(connectionString);
+        });
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IClientRepository, ClientRepository>();
     }

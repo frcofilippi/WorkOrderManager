@@ -14,7 +14,7 @@ public static class DependencyInjection
             config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
         });
 
-        services.AddScoped<IAuthenticationService, AuthenticationService>();
+        // services.AddScoped<IAuthenticationService, AuthenticationService>();
         return services;
     }
 }

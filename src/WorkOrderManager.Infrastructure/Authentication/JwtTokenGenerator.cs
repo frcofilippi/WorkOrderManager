@@ -4,6 +4,7 @@ namespace WorkOrderManager.Infrastructure.Authentication;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -45,5 +46,10 @@ public class JwtTokenGenerator : IJwtTokenGeneratorService
             signingCredentials: securityCredentials);
 
         return new JwtSecurityTokenHandler().WriteToken(securityToken);
+    }
+
+    public Task<AuthToken> GetCredentialsAsync(string user, string password)
+    {
+        throw new NotImplementedException();
     }
 }

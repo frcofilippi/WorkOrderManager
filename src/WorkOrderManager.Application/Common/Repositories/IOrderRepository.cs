@@ -1,11 +1,9 @@
-﻿
-namespace WorkOrderManager.Application.Common.Repositories;
-using WorkOrderManager.Domain.Orders;
+﻿using WorkOrderManager.Domain.Orders;
 using WorkOrderManager.Domain.Orders.ValueObjects;
+
+namespace WorkOrderManager.Application.Common.Repositories;
 public interface IOrderRepository
 {
-    IReadOnlyCollection<Order> Orders { get; }
-
     Task<Order> AddOrder(Order order);
 
     Task RemoveOrder(Order order);

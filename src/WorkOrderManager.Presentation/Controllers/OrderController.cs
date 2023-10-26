@@ -36,7 +36,7 @@ public class OrderController : ApiController
         var command = _mapper.Map<GetOrderByIdQuery>(request);
         ErrorOr<Order> getOrderByIdResult = await _sender.Send(command);
         return getOrderByIdResult.Match(
-            orderResult => new OkObjectResult(_mapper.Map<GetOrderByIdResponse>(getOrderByIdResult)),
+            orderResult => new OkObjectResult(_mapper.Map<GetOrderByIdResponse>(orderResult)),
             errors => Problem(errors));
     }
 

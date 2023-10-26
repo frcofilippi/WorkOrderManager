@@ -20,5 +20,10 @@ public class OrderLineId : ValueObject
     {
         yield return Value;
     }
+
+    public static OrderLineId Create(Guid val)
+    {
+        return new OrderLineId(val);
+    }
 }
 

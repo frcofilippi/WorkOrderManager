@@ -1,6 +1,3 @@
-
-namespace WorkOrderManager.Application.Orders.Commands;
-
 using ErrorOr;
 
 using MediatR;
@@ -12,6 +9,7 @@ using WorkOrderManager.Domain.Orders;
 using WorkOrderManager.Domain.Orders.Entities;
 using WorkOrderManager.Domain.Orders.ValueObjects;
 
+namespace WorkOrderManager.Application.Orders.Commands;
 
 public class CreateOrderCommandHanlder : IRequestHandler<CreateOrderCommand, ErrorOr<Order>>
 {
