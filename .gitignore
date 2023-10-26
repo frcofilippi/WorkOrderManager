@@ -3,6 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 pgdata/
+firebase.json
+workordermanager-identity-firebase-adminsdk-vf0dk-e03dc18805.json
 # User-specific files
 *.rsuser
 *.suo
