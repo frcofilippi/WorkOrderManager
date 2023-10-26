@@ -3,6 +3,7 @@
   <PropertyGroup>
 	  <AssemblyName>WorkOrderManager.Presentation</AssemblyName>
 	  <RootNamespace>WorkOrderManager.Presentation</RootNamespace>
+    <UserSecretsId>3e5376b1-fdc4-4717-84c2-6c7c8de6b724</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
