@@ -1,0 +1,16 @@
+@host=http://localhost:5085
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjNkNGM3Yi0zNzdmLTQzM2EtYjY4My0zZWE1YTdmODM0ZjIiLCJnaXZlbl9uYW1lIjoiRnJhbmNvIiwiZmFtaWx5X25hbWUiOiJGaWxpcHBpIiwianRpIjoiNmVlYzhiZTYtMWZlMi00Y2Q4LWEwMWEtYWRjZDg5NzA2NDA4IiwiZXhwIjoxNjk4MDg0MTA3LCJpc3MiOiJXb3JrT3JkZXJNYW5hZ2VyIiwiYXVkIjoiV29ya09yZGVyTWFuYWdlciJ9.Likx50z3utCiSQQSSwehmWldLHDHYv7x7TRwnXqoQEI
+@clientId=663d4c7b-377f-433a-b683-3ea5a7f834f2
+POST {{host}}/Client/AddAddress/?clientId={{clientId}}
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Home",
+  "street": "Curuzu Cuatia",
+  "streetNumber": "2551",
+  "city": "Cordoba",
+  "isBilling": false,
+  "isShipping": true
+}
