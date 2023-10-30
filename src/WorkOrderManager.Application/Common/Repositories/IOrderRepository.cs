@@ -1,5 +1,5 @@
-﻿using WorkOrderManager.Domain.Orders;
-using WorkOrderManager.Domain.Orders.ValueObjects;
+﻿using WorkOrderManager.Domain.Common;
+using WorkOrderManager.Domain.Common.ValueObjects;
 
 namespace WorkOrderManager.Application.Common.Repositories;
 public interface IOrderRepository

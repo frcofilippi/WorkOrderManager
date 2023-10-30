@@ -1,12 +1,11 @@
-namespace WorkOrderManager.Domain.Clients;
-
-using WorkOrderManager.Domain.Orders.ValueObjects;
 using WorkOrderManager.Domain.Clients.Entities;
-using WorkOrderManager.Domain.Orders;
+using WorkOrderManager.Domain.Common;
+using WorkOrderManager.Domain.Common.ValueObjects;
 
+namespace WorkOrderManager.Domain.Clients;
 public class Client
 {
-    private readonly List<Address?> _addresses = new ();
+    private readonly List<ClientAddress?> _addresses = new ();
     private readonly List<Order?> _orders = new ();
 
     private Client(ClientId clientId, string firstName, string lastName, string email, string identityId)
@@ -30,16 +29,16 @@ public class Client
 
     public IReadOnlyCollection<Order?> Orders => _orders.AsReadOnly();
 
-    public IReadOnlyCollection<Address?> Addresses => _addresses.AsReadOnly();
+    public IReadOnlyCollection<ClientAddress?> Addresses => _addresses.AsReadOnly();
 
-    public void AddNewShippingAddress(string name, string street, int number, string city, string country = "AR")
+    public void AddNewShippingAddress(string name, string street, int number, string city, string country = "AR", bool isDefault = false)
     {
-        _addresses.Add(Address.Create(name, street, number, city, country, false, true));
+        _addresses.Add(ClientAddress.Create(name, street, number, city, country, false, true, isDefault));
     }
 
-    public void AddNewBillingAddress(string name, string street, int number, string city, string country = "AR")
+    public void AddNewBillingAddress(string name, string street, int number, string city, string country = "AR", bool isDefault = false)
     {
-        _addresses.Add(Address.Create(name, street, number, city, country, true, false));
+        _addresses.Add(ClientAddress.Create(name, street, number, city, country, true, false, isDefault));
     }
 
     public static Client CreateUser(string firstName, string lastName, string email, string identityId)

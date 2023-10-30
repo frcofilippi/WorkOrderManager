@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WorkOrderManager.Domain.Orders;
+using WorkOrderManager.Domain.Common;
 
 namespace WorkOrderManager.Infrastructure.Persistence
 {

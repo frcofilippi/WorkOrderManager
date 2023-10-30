@@ -7,8 +7,8 @@ using MediatR;
 
 using WorkOrderManager.Application.Common.Repositories;
 using WorkOrderManager.Domain.Common.Errors;
-using WorkOrderManager.Domain.Orders;
-using WorkOrderManager.Domain.Orders.ValueObjects;
+using WorkOrderManager.Domain.Common;
+using WorkOrderManager.Domain.Common.ValueObjects;
 public class GetOrderByIdQuery : IRequest<ErrorOr<Order>>
 {
     public string Id { get; set; }

@@ -2,9 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using WorkOrderManager.Domain.Clients;
-using WorkOrderManager.Domain.Orders;
-using WorkOrderManager.Domain.Orders.Entities;
-using WorkOrderManager.Domain.Orders.ValueObjects;
+using WorkOrderManager.Domain.Common;
+using WorkOrderManager.Domain.Common.Entities;
+using WorkOrderManager.Domain.Common.ValueObjects;
 
 namespace WorkOrderManager.Infrastructure.Persistence.Configurations
 {
@@ -20,18 +20,22 @@ namespace WorkOrderManager.Infrastructure.Persistence.Configurations
                         value => OrderId.Create(value))
                     .ValueGeneratedNever();
 
+            builder.OwnsOne(o => o.DeliveryAddress);
+            builder.OwnsOne(o => o.BillingAddress);
             builder.OwnsMany(
                 o => o.OrderLines,
                 b =>
                 {
                     b.ToTable("OrderLines");
-                    b.WithOwner().HasForeignKey("OrderId");
+                    b.WithOwner().HasForeignKey(ol => ol.OrderId);
                     b.HasKey(ol => ol.Id);
                     b.Property(ol => ol.Id)
                     .HasConversion(id => id.Value, val => OrderLineId.Create(val))
                     .ValueGeneratedNever()
                     .HasColumnName("OrderLineId");
                 });
+
+            builder.Metadata.FindNavigation(nameof(Order.OrderLines)).SetPropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }

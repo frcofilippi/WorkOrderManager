@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 namespace WorkOrderManager.Infrastructure.Authentication.Identity;
 
 using WorkOrderManager.Application.Services.Identity;
-using WorkOrderManager.Domain.Orders.ValueObjects;
+using WorkOrderManager.Domain.Common.ValueObjects;
 
 using WorkUserManager.Application.Common.Repositories;
 

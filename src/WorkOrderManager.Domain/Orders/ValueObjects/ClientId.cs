@@ -1,4 +1,4 @@
-namespace WorkOrderManager.Domain.Orders.ValueObjects;
+namespace WorkOrderManager.Domain.Common.ValueObjects;
 
 using WorkOrderManager.Domain.Model;
 public class ClientId : ValueObject

@@ -1,6 +1,6 @@
 using WorkOrderManager.Domain.Model;
 
-namespace WorkOrderManager.Domain.Orders.ValueObjects;
+namespace WorkOrderManager.Domain.Common.ValueObjects;
 public class OrderId : ValueObject
 {
     public Guid Value { get; private set; }

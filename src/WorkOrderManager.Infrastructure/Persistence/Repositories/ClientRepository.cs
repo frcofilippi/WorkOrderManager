@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
 using WorkOrderManager.Domain.Clients;
-using WorkOrderManager.Domain.Orders.ValueObjects;
+using WorkOrderManager.Domain.Common.ValueObjects;
 using WorkUserManager.Application.Common.Repositories;
 
 namespace WorkOrderManager.Infrastructure.Persistence.Repositories;

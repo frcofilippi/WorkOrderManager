@@ -3,8 +3,9 @@
 using Microsoft.EntityFrameworkCore;
 
 using WorkOrderManager.Application.Common.Repositories;
-using WorkOrderManager.Domain.Orders;
-using WorkOrderManager.Domain.Orders.ValueObjects;
+using WorkOrderManager.Domain.Common;
+using WorkOrderManager.Domain.Common.Entities;
+using WorkOrderManager.Domain.Common.ValueObjects;
 
 namespace WorkOrderManager.Infrastructure.Persistence.Repositories;
 
@@ -26,7 +27,9 @@ public class OrderRepository : IOrderRepository
 
     public async Task<Order?> GetOrderById(OrderId orderId)
     {
-        return await _dbContext.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+        return await _dbContext.Orders
+                        .Include(o => o.OrderLines)
+                        .FirstOrDefaultAsync(o => o.Id == orderId);
     }
 
     public async Task RemoveOrder(Order order)

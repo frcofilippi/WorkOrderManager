@@ -2,8 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using WorkOrderManager.Domain.Clients;
-using WorkOrderManager.Domain.Clients.ValueObjects;
-using WorkOrderManager.Domain.Orders.ValueObjects;
+using WorkOrderManager.Domain.Common.ValueObjects;
 
 namespace WorkOrderManager.Infrastructure.Persistence.Configurations;
 
@@ -26,17 +25,20 @@ public class ClientConfiguration : IEntityTypeConfiguration<Client>
                 .WithOne()
                 .HasForeignKey(o => o.ClientId);
 
-        builder.OwnsMany(c => c.Addresses, ab =>
-        {
-            ab.ToTable("ClientAddresses");
-            ab.HasKey(a => a.Id);
-            ab.Property(a => a.Id)
-                    .ValueGeneratedNever()
-                    .HasConversion(
-                        id => id.Value,
-                        value => AddressId.Create(value))
-                    .HasColumnName("AddressId");
-            ab.WithOwner().HasForeignKey("ClientId");
-        });
+        // builder.OwnsMany(c => c.Addresses, ab =>
+        // {
+        //     ab.ToTable("ClientAddresses");
+        //     ab.HasKey(a => a.Id);
+        //     ab.Property(a => a.Id)
+        //             .ValueGeneratedNever()
+        //             .HasConversion(
+        //                 id => id.Value,
+        //                 value => AddressId.Create(value))
+        //             .HasColumnName("AddressId");
+        //     ab.WithOwner().HasForeignKey("ClientId");
+        // });
+
+        builder.HasMany(o => o.Addresses)
+                .WithOne();
     }
 }

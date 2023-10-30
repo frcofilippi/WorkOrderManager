@@ -1,7 +1,7 @@
-﻿namespace WorkOrderManager.Domain.Orders.Entities;
+﻿namespace WorkOrderManager.Domain.Common.Entities;
 
 using WorkOrderManager.Domain.Model;
-using WorkOrderManager.Domain.Orders.ValueObjects;
+using WorkOrderManager.Domain.Common.ValueObjects;
 public class OrderLine : Entity<OrderLineId>
 {
     private OrderLine(OrderLineId id, string name, string description)
@@ -14,6 +14,8 @@ public class OrderLine : Entity<OrderLineId>
     public string Name { get; private set; }
 
     public string Description { get; private set; }
+
+    public OrderId OrderId { get; set; }
 
     public static OrderLine CreateItem(string name, string desc)
     {

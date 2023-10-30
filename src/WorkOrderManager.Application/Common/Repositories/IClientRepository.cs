@@ -1,5 +1,5 @@
 using WorkOrderManager.Domain.Clients;
-using WorkOrderManager.Domain.Orders.ValueObjects;
+using WorkOrderManager.Domain.Common.ValueObjects;
 
 namespace WorkUserManager.Application.Common.Repositories;
 

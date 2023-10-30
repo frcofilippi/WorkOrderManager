@@ -1,5 +1,4 @@
-﻿
-namespace WorkOrderManager.Presentation.Controllers;
+﻿namespace WorkOrderManager.Presentation.Controllers;
 
 using ErrorOr;
 
@@ -12,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using WorkOrderManager.Application.Orders.Commands;
 using WorkOrderManager.Application.Orders.Queries;
-using WorkOrderManager.Domain.Orders;
+using WorkOrderManager.Domain.Common;
 using WorkOrderManager.Presentation.Contracts.Orders.CreateOrder;
 using WorkOrderManager.Presentation.Contracts.Orders.GetOrder;
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace WorkOrderManager.Infrastructure.Persistence.Migrations
+namespace WorkOrderManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class InitialMigration : Migration
@@ -31,15 +31,15 @@ namespace WorkOrderManager.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     AddressId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
+                    AddressName = table.Column<string>(type: "text", nullable: false),
                     Street = table.Column<string>(type: "text", nullable: false),
                     StreetNumber = table.Column<int>(type: "integer", nullable: false),
                     City = table.Column<string>(type: "text", nullable: false),
                     Country = table.Column<string>(type: "text", nullable: false),
-                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    IsDefaultAddress = table.Column<bool>(type: "boolean", nullable: false),
                     IsShipping = table.Column<bool>(type: "boolean", nullable: false),
                     IsBilling = table.Column<bool>(type: "boolean", nullable: false),
-                    ClientId = table.Column<Guid>(type: "uuid", nullable: false)
+                    ClientId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -48,8 +48,7 @@ namespace WorkOrderManager.Infrastructure.Persistence.Migrations
                         name: "FK_ClientAddresses_Clients_ClientId",
                         column: x => x.ClientId,
                         principalTable: "Clients",
-                        principalColumn: "ClientId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ClientId");
                 });
 
             migrationBuilder.CreateTable(
@@ -60,7 +59,14 @@ namespace WorkOrderManager.Infrastructure.Persistence.Migrations
                     CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ClientName = table.Column<string>(type: "text", nullable: false),
                     ClientId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ShippingAddress = table.Column<string>(type: "text", nullable: false)
+                    DeliveryAddress_Street = table.Column<string>(type: "text", nullable: false),
+                    DeliveryAddress_Number = table.Column<int>(type: "integer", nullable: false),
+                    DeliveryAddress_City = table.Column<string>(type: "text", nullable: false),
+                    DeliveryAddress_Country = table.Column<string>(type: "text", nullable: false),
+                    BillingAddress_Street = table.Column<string>(type: "text", nullable: false),
+                    BillingAddress_Number = table.Column<int>(type: "integer", nullable: false),
+                    BillingAddress_City = table.Column<string>(type: "text", nullable: false),
+                    BillingAddress_Country = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

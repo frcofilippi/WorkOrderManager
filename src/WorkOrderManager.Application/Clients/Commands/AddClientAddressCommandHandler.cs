@@ -6,7 +6,7 @@ using WorkOrderManager.Application.Services.Identity;
 using WorkOrderManager.Domain.Clients;
 using WorkOrderManager.Domain.Clients.Entities;
 using WorkOrderManager.Domain.Common.Errors;
-using WorkOrderManager.Domain.Orders.ValueObjects;
+using WorkOrderManager.Domain.Common.ValueObjects;
 
 using WorkUserManager.Application.Common.Repositories;
 

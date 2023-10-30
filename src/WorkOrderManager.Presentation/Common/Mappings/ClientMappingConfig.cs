@@ -16,9 +16,9 @@ public class ClientMappingConfig : IRegister
         config.NewConfig<CreateClientRequest, CreateClientCommand>()
         .Map(dst => dst, src => src);
 
-        config.NewConfig<Address, AddressResponse>()
-        .Map(dst => dst.Name, src => src.Name)
-        .Map(dst => dst.fullAddress, src => $"{src.Street}, {src.StreetNumber}, {src.City}, {src.Country}")
+        config.NewConfig<ClientAddress, AddressResponse>()
+        .Map(dst => dst.Name, src => src.AddressName)
+        .Map(dst => dst.fullAddress, src => src.Address.FullAddress)
         .Map(dst => dst.addressId, src => src.Id.Value.ToString());
 
         config.NewConfig<Client, CreateClientResponse>()

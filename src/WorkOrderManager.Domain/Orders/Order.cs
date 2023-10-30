@@ -1,18 +1,22 @@
-namespace WorkOrderManager.Domain.Orders;
+namespace WorkOrderManager.Domain.Common;
 
 using WorkOrderManager.Domain.Model;
-using WorkOrderManager.Domain.Orders.Entities;
-using WorkOrderManager.Domain.Orders.ValueObjects;
+using WorkOrderManager.Domain.Common.Entities;
+using WorkOrderManager.Domain.Common.ValueObjects;
 public class Order : AgregateRoot<OrderId>
 {
-    private readonly List<OrderLine> _lines = new ();
+    private readonly List<OrderLine> _orderLines = new();
 
-    private Order(OrderId id, DateTime creationDate, ClientId clientId, string clientName)
+    private Order() : base(default) { }
+
+    private Order(OrderId id, DateTime creationDate, ClientId clientId, string clientName, Address deliveryAddress, Address billingAddress)
         : base(id)
     {
         CreationDate = creationDate;
         ClientName = clientName;
         ClientId = clientId;
+        DeliveryAddress = deliveryAddress;
+        BillingAddress = billingAddress;
     }
 
     public DateTime CreationDate { get; private set; }
@@ -21,18 +25,20 @@ public class Order : AgregateRoot<OrderId>
 
     public ClientId ClientId { get; private set; }
 
-    public string ShippingAddress { get; private set; }
+    public Address DeliveryAddress { get; private set; }
 
-    public IReadOnlyCollection<OrderLine> OrderLines => _lines.ToList();
+    public Address BillingAddress { get; private set; }
+
+    public IReadOnlyCollection<OrderLine> OrderLines => _orderLines.ToList();
 
     public void AddLine(OrderLine line)
     {
-        _lines.Add(line);
+        _orderLines.Add(line);
     }
 
-    public static Order CreateOrder(ClientId clientId, string clientName)
+    public static Order CreateOrder(ClientId clientId, string clientName, Address delivery, Address billing)
     {
-        var order = new Order(OrderId.CreateUnique(), DateTime.UtcNow, clientId, clientName);
+        var order = new Order(OrderId.CreateUnique(), DateTime.UtcNow, clientId, clientName, delivery, billing);
         return order;
     }
 
