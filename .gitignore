@@ -5,6 +5,7 @@
 pgdata/
 firebase.json
 workordermanager-identity-firebase-adminsdk-vf0dk-e03dc18805.json
+secrets.json
 # User-specific files
 *.rsuser
 *.suo
